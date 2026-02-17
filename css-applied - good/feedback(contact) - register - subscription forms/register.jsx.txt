@@ -1,0 +1,93 @@
+import React, { useState } from 'react';
+import '../allforms.css';
+
+const RegistrationForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({});
+  const [submittedData, setSubmittedData] = useState(null);
+  const validate = () => {
+    let tempErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.name.trim()) {
+      tempErrors.name = "Name is required";
+    }
+    if (!emailRegex.test(formData.email)) {
+      tempErrors.email = "Email format is invalid (e.g., name@example.com)";
+    }
+    if (formData.password.length < 8) {
+      tempErrors.password = "Password must be at least 8 characters";
+    }
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    if (validate()) {
+      setSubmittedData(formData);
+      console.log("Form Submitted Successfully:", formData);
+    } else {
+      setSubmittedData(null);
+    }
+  };
+  return (
+    <div style={{ maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
+      <h2>User Registration</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '15px' }}>
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            style={{ width: '100%', display: 'block' }}
+          />
+          {errors.name && <span style={{ color: 'red', fontSize: '12px' }}>{errors.name}</span>}
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            style={{ width: '100%', display: 'block' }}
+          />
+          {errors.email && <span style={{ color: 'red', fontSize: '12px' }}>{errors.email}</span>}
+        </div>       
+        <div style={{ marginBottom: '15px' }}>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            style={{ width: '100%', display: 'block' }}
+          />
+          {errors.password && <span style={{ color: 'red', fontSize: '12px' }}>{errors.password}</span>}
+        </div>
+        <button type="submit" style={{ padding: '10px 20px', cursor: 'pointer' }}>Register</button>
+      </form>
+      {submittedData && (
+        <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f9f9f9', border: '1px solid #ddd' }}>
+          <h3>Submitted User Details:</h3>
+          <p><strong>Name:</strong> {submittedData.name}</p>
+          <p><strong>Email:</strong> {submittedData.email}</p>
+          <p><strong>Password:</strong> ******** (Hidden for security)</p>
+        </div>
+      )}
+    </div>
+  );
+};
+export default RegistrationForm;

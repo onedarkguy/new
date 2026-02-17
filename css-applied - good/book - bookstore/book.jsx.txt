@@ -1,0 +1,10 @@
+function Book(props) {
+    return (
+        <div style={{ border: "1px solid black", padding: "10px", width: "200px" }}>
+            <img src={props.image} alt={props.title} width="150" />
+            <h4>{props.title}</h4>
+            <p>Author: {props.author}</p>
+        </div>
+    );
+}
+export default Book

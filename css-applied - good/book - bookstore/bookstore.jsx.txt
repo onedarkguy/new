@@ -1,0 +1,31 @@
+import React from "react";
+import Book from "./Book.jsx";
+class BookStore extends React.Component {
+    render() {
+        return (
+            <div style={{ display: "flex", gap: "20px" }}>
+                <Book
+                    title="Rich dad poor dad"
+                    author="Robert Kiyosaki"
+                    image="/first.jpg"
+                />
+                <Book
+                    title="Atomic Habit"
+                    author="James Clear"
+                    image="/second.jpg"
+                />
+                <Book
+                    title="Rich dad poor dad"
+                    author="Robert Kiyosaki"
+                    image="/first.jpg"
+                />
+                <Book
+                    title="Atomic Habit"
+                    author="James Clear"
+                    image="/second.jpg"
+                />
+            </div>
+        );
+    }
+}
+export default BookStore;

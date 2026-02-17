@@ -1,0 +1,10 @@
+import React from "react";
+class WelcomeMessage extends React.Component {
+    render() {
+        return <h3>Welcome {this.props.title}</h3>;
+    }
+}
+WelcomeMessage.defaultProps = {
+    title: "Guest User",
+};
+export default WelcomeMessage;
